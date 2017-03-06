@@ -1,6 +1,6 @@
-Each script should be configured in conf/runners/_conf-name_.json file, where _conf-name_ is an unique name for each script. Each file should contain configuration for only one script.
+Each script should be configured in conf/runners/_conf-name_.json file, where _conf-name_ is an unique name for each script. Each configuration file should contain only one script.
 
-[Example configuration file](../../blob/master/testing/configs/write_file.json)
+Example of configuration files can be found in [master/testing/configs](../blob/master/testing/configs)
 
 Here is a descripton of all possible elements in a configuration file:
 ```javascript
