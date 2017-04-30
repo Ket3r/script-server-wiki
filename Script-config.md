@@ -7,17 +7,18 @@ Here is a descripton of all possible elements in a configuration file:
 {
   /**
     * Required: no
-    * Description: user-friendly script name. Will be displayed to user 
+    * Description: user-friendly script name. Will be displayed to user
     * Type: string
     * Default: script_path filename without extension
     */
   "name": "My example script",
   /**
     * Required: YES
-    * Description: path to the script (relative to working directory)
+    * Description: path to the script (relative to working directory) OR just a command
     * Type: string
     */
   "script_path": "/some/path/to/script.sh",
+  /** or "script_path": "python my_script.py" */
   /**
     * Required: no
     * Description: user-friendly script description, which will be shown to a user
@@ -31,25 +32,32 @@ Here is a descripton of all possible elements in a configuration file:
     * Default: true
     */
   "requires_terminal": true,
-    /**
-    * Required: no
-    * Description: allows to specify working directory of the script.
-    * Type: string
-    * Default: the working directory, from which the server was started
-    */
+  /**
+  * Required: no
+  * Description: allows to specify working directory of the script.
+  * Type: string
+  * Default: the working directory, from which the server was started
+  */
   "working_directory": "/home/me/temp",
+  /**
+  * Required: no
+  * Default: true for linux and mac, false otherwise
+  * Description: enables bash color parsing and sending colored output to the user interface. E.g. \033[01;31m is a bold red text
+  * Type: boolean
+  */
+  "bash_formatting": true,
   /**
     * Required: no
     * Description: list of script parameters
     * Type: array
     */
   "parameters": [
-  {
-    /**
-      * Required: no
-      * Description: the name of the parameter, which will be shown to the user. Required for non-constant parameters
-      * Type: string
-      */
+    {
+      /**
+        * Required: no
+        * Description: the name of the parameter, which will be shown to the user. Required for non-constant parameters
+        * Type: string
+        */
       "name": "MyParam",
       /**
       * Required: no
@@ -64,15 +72,15 @@ Here is a descripton of all possible elements in a configuration file:
       * Default: false
       */
       "no_value": false,
-       /**
-      * Required: no
-      * Description: user-friendly description of the parameter, shown to the user (not yet implemented in GUI)
-      * Type: string
-      */
+      /**
+     * Required: no
+     * Description: user-friendly description of the parameter, shown to the user (not yet implemented in GUI)
+     * Type: string
+     */
       "description": "This parameter is used for filename",
       /**
       * Required: no
-      * Description: if the value of the parameter is required 
+      * Description: if the value of the parameter is required
       * Type: boolean
       * Default: false
       */
@@ -98,13 +106,13 @@ Here is a descripton of all possible elements in a configuration file:
       "type": "int",
       /**
       * Required: no
-      * Description: int type only, upper value bound 
+      * Description: int type only, upper value bound
       * Type: string
       */
       "max": "50",
       /**
       * Required: no
-      * Description: int type only, lower value bound 
+      * Description: int type only, lower value bound
       * Type: string
       */
       "min": "-1",
@@ -113,9 +121,13 @@ Here is a descripton of all possible elements in a configuration file:
       * Description: list type only, array of allowed values for the parameter. Can be either predefined values or result from script invocation
       * Type: array or object
       */
-      "values": [ "Apple", "Orange", "Banana" ]
+      "values": [
+        "Apple",
+        "Orange",
+        "Banana"
+      ]
       /** or "values": { "script": "ls /home/me/projects" } */
-  }
+    }
   ]
 }
 ```
