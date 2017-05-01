@@ -47,6 +47,19 @@ Here is a descripton of all possible elements in a configuration file:
   */
   "bash_formatting": true,
   /**
+  * Required: no
+  * Description: list of files, which will be downloadable by user after a script execution, can be:
+      -file path (with * and ** wildcards support)
+      -regex pattern, for searching file path in script output. Should start with #, 
+              Matching group number can be specified with number# (e.g. #2#). 
+              #any_path can be used as analogue to ** in normal path specification
+  * Type: array
+  */
+  "output_files": [
+    "##any_path/localhost.*.log",
+    "~/simple.txt"
+  ],
+  /**
     * Required: no
     * Description: list of script parameters
     * Type: array
