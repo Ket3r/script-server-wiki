@@ -14,7 +14,8 @@ Here is a descripton of all possible elements in a configuration file:
   "name": "My example script",
   /**
     * Required: YES
-    * Description: path to the script (relative to working directory) OR just a command
+    * Description: path to the script (relative to working directory) OR just a command.
+                   WINDOWS IMPORTANT: any non-batch scripts should be run as a command, e.g. 'python my_script.py'
     * Type: string
     */
   "script_path": "/some/path/to/script.sh",
