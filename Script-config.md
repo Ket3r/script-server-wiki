@@ -132,6 +132,13 @@ Here is a descripton of all possible elements in a configuration file:
       "min": "-1",
       /**
       * Required: no
+      * Description: don't show value on server anywhere, replace it with a mask
+      * Type: boolean
+      * Default: false
+      */
+      "secure": true,
+      /**
+      * Required: no
       * Description: list type only, array of allowed values for the parameter. Can be either predefined values or result from script invocation
       * Type: array or object
       */
