@@ -5,6 +5,13 @@ conf.json structure:
 {
   /**
     * Required: no
+    * Description: custom listening address
+    * Type: string
+    * Default: 0.0.0.0 (any connection)
+    */
+  "address": "0.0.0.0",
+  /**
+    * Required: no
     * Description: custom port for running the web server
     * Type: number
     * Default: 5000 (5443 for ssl)
@@ -151,6 +158,13 @@ conf.json structure:
         "url": "localhost:5000/test_alerts"
       }
     ]
-  }
+  },
+  /**
+    * Required: no
+    * Description: custom web page title
+    * Type: string
+    * Default: Script Server
+    */
+  "title": "My Script Server"
 }
 ```
