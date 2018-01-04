@@ -93,6 +93,7 @@ conf.json structure:
         *    http: alert message is sent to HTTP server via GET request. Title and body are concatenated together (separated by new line) and fill request body
         * 
         * ATTENTION: email requires smtplib python module to be installed
+        * ATTENTION: http requires requests python module to be installed
         * Type: string
         */
         "type": "email",
