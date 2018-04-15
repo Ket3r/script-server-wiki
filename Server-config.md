@@ -44,7 +44,7 @@ conf.json structure:
   "auth": {
     /**
     * Required: yes
-    * Description: type of authentication protocol. Supported types: ldap
+    * Description: type of authentication protocol. Supported types: ldap, google_oauth
     * ATTENTION: ldap auth requires python ldap3 module to be installed
     * Type: string
     */
@@ -71,8 +71,36 @@ conf.json structure:
     * Description: protocol version
     * Type: int
     */
-    "version": 3
+    "version": 3,
+    /**
+    * Protocols: google_oauth
+    * Required: yes
+    * Description: Client ID, provided by google
+    * Type: string
+    */
+    "client_id": "12345678.apps.googleusercontent.com",
+   /**
+    * Protocols: google_oauth
+    * Required: yes
+    * Description: Secret, provided by google
+    * Type: string
+    */
+    "secret": "AbCdEfgHI",
+   /**
+    * Required: no (yes in case of google_oauth)
+    * Description: list of allowed usernames, who can access script-server. Single asterisk (*) stays for any user
+    * Default: "*" (any user)
+    * Type: list (or "*" string)
+    */
+    "allowed_users": ["myname", "my_friend"]
   },
+  /**
+    * Required: no
+    * Default: ["127.0.0.1"]
+    * Description: list (or single string) of usernames or IPs (only if auth is disabled), who can access admin.html page. Single asterisk "*" stays for any user (not recommended)
+    * Type: list (or a string for a single value)
+    */
+  "admin_users": ["buggy@gmail.com", "somebody@gmail.com"],
   /**
     * Required: no
     * Description: alerts configuration, which is used when a script fails
