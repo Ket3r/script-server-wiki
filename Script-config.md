@@ -50,8 +50,10 @@ Here is a descripton of all possible elements in a configuration file:
   /**
   * Required: no
   * Description: list of files, which will be downloadable by user after a script execution, can be:
-      -file path (with * and ** wildcards support)
-      -regex pattern, for searching file path in script output. Should start with #, 
+      - file path, with:
+          - * and ** wildcard support
+          - substitution of script parameters with $$$parameter_name (e.g. /home/me/$$$f1.txt, when f1=readme, becomes /home/me/readme.txt)
+      - regex pattern, for searching file path in script output. Should start with #, 
               Matching group number can be specified with number# (e.g. #2#). 
               #any_path can be used as analogue to ** in normal path specification
   * Type: array
@@ -81,7 +83,8 @@ Here is a descripton of all possible elements in a configuration file:
       "param": "-p",
       /**
       * Required: no
-      * Description: if true, then no value will be passed to the script, only "param" will be specified
+      * Description: if true, then no value will be passed to the script, only "param" will be specified.
+                     Makes parameter type to be boolean
       * Type: boolean
       * Default: false
       */
@@ -101,12 +104,24 @@ Here is a descripton of all possible elements in a configuration file:
       "required": false,
       /**
       * Required: no
+      * Supported types: text, int, boolean, list
       * Description: default value shown to user
       * Type: string
       */
       "default": "empty",
       /**
       * Required: no
+      * Description: parameter type. Important: if no_value, then type is ignored and always boolean
+                     - In case of file_upload, user file is uploaded to the server 
+                       and then passed to a script as an absolute path
+      * Default: "text"
+      * Allowed values: int, list, text, file_upload
+      * Type: string
+      */
+      "type": "int",
+      /**
+      * Required: no
+      * Supported types: text, boolean
       * Description: don't show parameter to user, but fill it in the script with the value of "default" field
       * Type: boolean
       * Default: false
@@ -114,19 +129,15 @@ Here is a descripton of all possible elements in a configuration file:
       "constant": false,
       /**
       * Required: no
-      * Description: parameter type. Allowed values: int, list. Any other value will be simple text edit.
-      * Type: string
-      */
-      "type": "int",
-      /**
-      * Required: no
-      * Description: int type only, upper value bound
+      * Supported types: int
+      * Description: upper value bound
       * Type: string
       */
       "max": "50",
       /**
       * Required: no
-      * Description: int type only, lower value bound
+      * Supported types: int
+      * Description: lower value bound
       * Type: string
       */
       "min": "-1",
@@ -139,6 +150,7 @@ Here is a descripton of all possible elements in a configuration file:
       "secure": true,
       /**
       * Required: no
+      * Supported types: list
       * Description: list type only, array of allowed values for the parameter. Can be either predefined values or result from script invocation
       * Type: array or object
       */
