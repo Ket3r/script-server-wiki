@@ -11,12 +11,14 @@ GUI is very straightforward and easy-to-use for anyone. Example of the user inte
 ## Features
 1. Users can specify script parameters. Different parameter types are supported [conf-script]
 2. Providing immediate output to the user and reading his input (if script is interactive)
-3. LDAP authentication support [conf-server]
+3. LDAP and Google OAuth support [conf-server]
 4. Alerting in case of script execution failures (email or web hook) [conf-server]
 5. HTTPS support [conf-server]
 6. Transparent logging and auditing
 7. Bash colors/styles support [conf-script]
 8. Download script execution results [conf-script]
+9. Admin page (admin.html) with script execution logs and information
+10. Running multiple scripts for a user in parallel
 
 [conf-script] These features are configurable per script, see [script config page](https://github.com/bugy/script-server/wiki/Script-config) for details
 
@@ -24,8 +26,9 @@ GUI is very straightforward and easy-to-use for anyone. Example of the user inte
 
 ## Requirements
 ### Server-side
-Python 3.4+ with following modules:
-* Tornado
+Python 3.4 or higher with the following modules:
+* Tornado 4/5
+* typing *(for python 3.4 only)*
 
 Some features can require additional modules. Such requirements are specified in a corresponding feature description.
 
@@ -40,12 +43,17 @@ Any more or less up to date browser with enabled JS
 Internet connection is not needed. All the files are loaded from the server.
 
 ## Installation
+### Non-developer mode
+1. Download script-server.zip file from [Latest release](https://github.com/bugy/script-server/releases/latest)
+2. Create script-server folder anywhere on your PC and extract zip content to this folder
+
 ### Developer mode
 1. Clone/download the repository
-2. Run tools/init.py script (this will download javascript libraries)
+2. Run 'tools/init.py --dev' script (this will download javascript libraries)
+
 
 ## Setup and run
-1. Create configurations for your scripts in *conf/runners/* folder (see [script config page](https://github.com/bugy/script-server/wiki/Script-config) for details)
+1. Create json configurations for your scripts in *conf/runners/* folder (see [script config page](https://github.com/bugy/script-server/wiki/Script-config) for details)
 2. Launch launcher.py from script-server folder
   * Windows command: launcher.py
   * Linux command: ./launcher.py
