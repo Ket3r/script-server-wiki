@@ -6,12 +6,23 @@ Configurable properties:
 * [name](#name)
 * [script_path](#script_path)
 * [description](#description)
-* [requires_terminal](#requires_terminal)
 * [working_directory](#working_directory)
-* [bash_formatting](#bash_formatting)
 * [output_files](#output_files)
+* [requires_terminal](#requires_terminal)
+* [bash_formatting](#bash_formatting)
 * [parameters](#parameters)
-  * [parameters](#parameters)
+  * [name](#--name)
+  * [param](#--param)
+  * [no_value](#--no_value)
+  * [description](#--description)
+  * [required](#--required)
+  * [constant](#--constant)
+  * [default](#--default)
+  * [type](#--type)
+  * [max](#--max)
+  * [min](#--min)
+  * [secure](#--secure)
+  * [values](#--values)
 
 ---
 
@@ -39,13 +50,6 @@ _Required_: no
 _Type_: string  
 _Example_: `"description": "This script shuts down the server"`  
 
-### `requires_terminal`
-(Linux only)  
-Specifies, if the script should be run in pseudo terminal mode. This is useful because some programs behave differently in terminal and non-interactive modes.  
-
-_Required_: no  
-_Type_: boolean  
-_Default_: true  
 
 ### `working_directory`
 Working directory for the script  
@@ -54,13 +58,6 @@ _Required_: no
 _Type_: string  
 _Default_: script-server directory  
 
-### `bash_formatting`
-Enables ANSI escape command parsing and showing formatted output on the user interface. E.g. \033[01;31m is a bold red text  
-Supported escape sequences: 16 text colors and 16 background colors, 4 text styles  
-
-_Required_: no  
-_Type_: boolean  
-_Default_: true for linux and mac, false otherwise  
 
 ### `output_files`
 List of files, which will be downloadable by user after a script execution, can be:  
@@ -97,6 +94,24 @@ _Example_:
 	"/home/#1#username=(\w+)#/file.txt"
 ]
 ```  
+
+### `requires_terminal`
+(Linux only)  
+Specifies, if the script should be run in pseudo terminal mode. This is useful because some programs behave differently in terminal and non-interactive modes.  
+
+_Required_: no  
+_Type_: boolean  
+_Default_: true  
+
+
+### `bash_formatting`
+Enables ANSI escape command parsing and showing formatted output on the user interface. E.g. \033[01;31m is a bold red text  
+Supported escape sequences: 16 text colors and 16 background colors, 4 text styles  
+
+_Required_: no  
+_Type_: boolean  
+_Default_: true for linux and mac, false otherwise  
+
 
 ### `parameters`
 List of script parameters. Parameters are shown on the GUI and passed to a script exactly in the same order.
