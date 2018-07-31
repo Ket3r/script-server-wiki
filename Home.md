@@ -1,5 +1,5 @@
 # script-server
-Script-server is a Web GUI and web server for scripts.  
+Script-server is a Web GUI and a web server for scripts.  
 
 For users it's just a web page, where he specifies script parameters and executes them.  
 For system administrators it's a possibility to share their scripts with users, without the need to set up an environment or properly adjust ssh access rights.  
