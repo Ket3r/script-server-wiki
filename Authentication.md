@@ -4,22 +4,26 @@ Authentication can be enabled in Script server via configuration (see [[auth|Ser
 
 If authentication is *not* enabled, please refer to [No Auth](#no-auth) section  
 
-**Security note**: script-server does not and will not store any user credentials/tokens locally. However, some identification data is stored on users PC in encrypted form. Encryption key is available on server side only. 
-Passwords or any securiry tokens are not stored anywhere.  
+**Security note**: Script server does not and will not store any user credentials/tokens locally. However, some identification data is stored on users PC in encrypted form. Encryption key is available on server side only. 
+User passwords or any securiry tokens are not stored anywhere.  
 
-When authentication is enabled, users are required to login, before accessing script-server.  
+When authentication is enabled, users are required to login, before accessing the Script server.  
 
-Authentication is used in script-server for the following purposes:
+**Authentication purposes**
+Authentication is used in the Script server for the following purposes:
 * auditing and logging user actions (executing scripts)
-* controlling access to the script-server or/and to scripts
+* controlling access to the Script server or/and to scripts
+* allowing access to user's scripts executions
 * allowing access to user's temp files  
 
 ---
 
 ## LDAP
+_Requires: python ldap3 module_  
+
 Script server can authenticate users against your LDAP server. Users would be prompted for username and login to check if the user have access to the LDAP server. Access is validated by a LDAP bind operation with simple authentication.  
 
-After the authentication, user credentials are immediately discarded. User login will stay valid in script-server for 1 month (even if he looses access to the LDAP server).  
+After the authentication, user credentials are immediately discarded. User login will stay valid in Script server for 1 month (even if he looses access to the LDAP server).  
 
 **username_pattern**  
 Bind operation usually requires user's full distinguished name (dn). ActiveDirectory accepts some other username formats as well.  
@@ -43,7 +47,17 @@ In order to load user groups `base_dn` property should be defined in the [[confi
 
 
 ## Google OAuth
-To be done...
+_Requires: connection to google.com and googleapis.com_  
+
+Script server can authenticate users via [Google OAuth Service](https://developers.google.com/identity/protocols/OAuth2). `client_id` and `secret` properties should be acquired from Google and configured in the Script server.  
+
+Usernames of the users are their email addresses. These email adresses can and should be used when configuring user access rights.  
+User emails are the only information which Script server uses from the Google OAuth Service.  
+
+**allowed_users**  
+Google OAuth doesn't perform any access control itself. So any user with google account would be able to access your instance of Script server. To prevent it, there is a [[configuration property|Server-configuration#--allowed_users]] `allowed_users`, which is required in case of Google OAuth. Simply put the emails of all allowed users there (or you can even put &ast; for any user).  
 
 ## No Auth
+Script server needs to identify users even if authentication is not enabled. Identification is needed for the same [Authentication purposes](#authentication-purposes)  
+
 To be done...
