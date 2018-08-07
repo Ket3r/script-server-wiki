@@ -9,7 +9,7 @@ User passwords or any securiry tokens are not stored anywhere.
 
 When authentication is enabled, users are required to login, before accessing the Script server.  
 
-**Authentication purposes**
+### Authentication purposes
 Authentication is used in the Script server for the following purposes:
 * auditing and logging user actions (executing scripts)
 * controlling access to the Script server or/and to scripts
