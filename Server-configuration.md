@@ -163,6 +163,7 @@ _Example_: `"client_id": "12345678.apps.googleusercontent.com"`
 ### - `secret`
 (Google OAuth)  
 Secret, provided by Google  
+Environment variables can be used, prefixed by $$  
 
 _Required_: yes  
 _Type_: string  
