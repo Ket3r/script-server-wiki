@@ -60,4 +60,30 @@ Google OAuth doesn't perform any access control itself. So any user with google 
 ## No Auth
 Script server needs to identify users even if authentication is not enabled. Identification is needed for the same [Authentication purposes](#authentication-purposes)  
 
-To be done...
+There are 2 possible identificators in the Script server:  
+* [random personal token](#personal-token) (default)  
+* [IP](#ip) (can be configured)  
+
+Access rights are configured based on these identificators.  
+
+### personal token 
+To my knowledge, there is no reliable way to identify anonymous users. Therefore on initial connection a user gets a unique personal token, which will stay valid for at least several days.  
+The token is encrypted by the server and stored on client side.  
+
+This token can be retrieved from the server logs or from an execution log file.  
+
+This token can be used for access configuration. However by its nature, this token is not a best option for configuration: it's hard to remember and find out and it's temporal. So if possible, it's always better to configure IP identification.  
+
+### IP
+Identifying users by IP has multiple problems:
+* Users behind NAT/proxy share the same IP
+* IP spoofing [(wikipedia)](https://en.wikipedia.org/wiki/IP_address_spoofing) 
+* DHCP [(wikipedia)](https://en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol)  
+
+But if you have trusted users and restricted network, you can add your users to `trusted_ips` list ([[see config|Server-configuration#--trusted_ips]]).  
+After that you would be able to configure users access by their IP.  
+
+**reverse proxy**  
+If you are using a reverse proxy, real user IPs are not resolved by default. However, if you add the proxy's IP in the `trusted_ips` list, a real IP will be taken from X-Forwarded-For or X-Real-IP headers (proxy has to fill them).  
+
+Please note, that this will cause all the users coming through proxy to be trusted as well.  
