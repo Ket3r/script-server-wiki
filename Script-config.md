@@ -45,6 +45,7 @@ _Example2_: `"script_path": "python my_script.py"`
 
 ### `description`
 User-friendly script description, which will be shown to a user  
+Markdown with GitHub flavour can be used  
 
 _Required_: no  
 _Type_: string  
@@ -58,6 +59,12 @@ _Required_: no
 _Type_: string  
 _Default_: script-server directory  
 
+### `allowed_users`
+List of users, who can access the script  
+
+_Required_: no  
+_Type_: json array  
+_Default_: any user  
 
 ### `output_files`
 List of files, which will be downloadable by user after a script execution, can be:  
