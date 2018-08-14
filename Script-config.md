@@ -1,12 +1,13 @@
 Each script should be configured in conf/runners/_conf-name_.json file, where _conf-name_ is an unique name for each script. Each configuration file should contain only one script. Configuration should be a valid JSON file.
 
-Examples of configuration files can be found in [master/testing/configs](../blob/master/samples/configs) or see a full config at the bottom of the page.
+Examples of configuration files can be found in [[stable/testing/configs|https://github.com/bugy/script-server/tree/stable/samples/configs]] or see a full config at the bottom of the page.
 
 Configurable properties:
 * [name](#name)
 * [script_path](#script_path)
 * [description](#description)
 * [working_directory](#working_directory)
+* [allowed_users](#allowed_users)
 * [output_files](#output_files)
 * [requires_terminal](#requires_terminal)
 * [bash_formatting](#bash_formatting)
