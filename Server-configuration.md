@@ -391,8 +391,7 @@ _Example_: `"execution_date_format": "%y-%m-%d_%H-%M-%S"`
 		"all": ["@admin_users", "@dev", "@support", "alice"]
 	},
 	"trusted_ips": [ "192.168.0.1", "192.168.0.2" ]
-  }
-  "admin_users": ["buggy@gmail.com", "somebody@gmail.com"],
+  },
   "alerts": {
     "destinations": [
       {
