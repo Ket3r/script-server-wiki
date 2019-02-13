@@ -1,4 +1,5 @@
 Script-server has default settings and works out of the box. For changing the settings, please edit _conf/conf.json_ file (create new if needed).  
+You can set custom conf.json location by running Script server with -f parameter (e.g. `launcher.py -f /home/me/configs/script-server.json`)  
 Please note, that configuration changes require server restart.  
 
 [Example](#example) can be found at the bottom of the page.  
@@ -19,7 +20,7 @@ Full list of configurable properties:
   * [client_id](#--client_id) 
   * [secret](#--secret) 
 * [access](#access)
-  * [allowed users](#--allowed-users)
+  * [allowed users](#--allowed_users)
   * [admin_users](#--admin_users)
   * [groups](#--groups)
   * [trusted_ips](#--trusted_ips)
