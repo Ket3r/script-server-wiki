@@ -252,12 +252,13 @@ _Type_: json array
 _Default_: []
 
 ### --- `type`
-Type of destination. Supported values:
-*email*  
-(requires smtplib module)  
+Type of destination. Supported values:  
+**email**  
+requires `smtplib` module  
 Alert is send as an email. Execution log file will be attached as a file  
-*http*  
-(requires requests module)  
+  
+**http**  
+requires `requests` module  
 Alert message is sent to an HTTP server via POST request. The alert message will be send in the request body, under _message_ name.  
 Execution log file will be attached as a multipart file with "log" name.  
 
