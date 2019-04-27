@@ -49,7 +49,7 @@ Configuration section for VirtualHost:
     RewriteEngine On
     RewriteCond %{HTTP:UPGRADE} ^WebSocket$ [NC]
     RewriteCond %{HTTP:CONNECTION} Upgrade$ [NC]
-    RewriteRule /(.*) ws:/$1 [P]
+    RewriteRule /(.*) ws:/$1 [P,NE]
 </Location>
 ```  
 Change `ScriptServerUrl` if needed.
