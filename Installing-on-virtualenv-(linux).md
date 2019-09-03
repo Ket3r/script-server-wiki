@@ -9,7 +9,7 @@
 5. Create a folder for script server and navigate to it
 `mkdir -p any/path/script-server && cd any/path/script-server`
 6. Download latest release
-`wget https://github.com/bugy/script-server/releases/download/1.12.0/script-server.zip`
+`wget https://github.com/bugy/script-server/releases/latest/download/script-server.zip`
 7. Extract zip contents
 `unzip script-server.zip` (If unzip command not found, install unzip with `sudo apt-get install unzip`)
 8. Install requirements
