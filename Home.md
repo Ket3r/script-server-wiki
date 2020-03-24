@@ -18,7 +18,7 @@ No script modifications are needed - you configure each script in Script server 
 - Access control
 - Alerts
 - Logging and auditing
-- Formatted output support (colors, styles, caret positioning)
+- Formatted output support (colors, styles, cursor positioning, clearing)
 - Download of script output files
 - Execution history
 - Admin page for script configuration
@@ -40,16 +40,26 @@ OS support:
 ### Client-side
 Any more or less up to date browser with enabled JS
 
-Internet connection is not needed. All the files are loaded from the server.
+Internet connection is **not** needed. All the files are loaded from the server.
 
 ## Installation
-### Non-developer mode
-1. Download script-server.zip file from [Latest release](https://github.com/bugy/script-server/releases/latest)
+### For production
+1. Download script-server.zip file from [Latest release](https://github.com/bugy/script-server/releases/latest) or [Dev release](https://github.com/bugy/script-server/releases/tag/dev)
 2. Create script-server folder anywhere on your PC and extract zip content to this folder
 
-### Developer mode
+(For detailed steps on linux with virtualenv, please see [Installation guide](https://github.com/bugy/script-server/wiki/Installing-on-virtualenv-(linux)))
+
+##### As a docker container
+Please find pre-built images here: https://hub.docker.com/r/bugy/script-server/tags  
+For the usage please check [this ticket](https://github.com/bugy/script-server/issues/171#issuecomment-461620836)
+
+### For development
 1. Clone/download the repository
-2. Run 'tools/init.py --dev' script (this will download javascript libraries)
+2. Run 'tools/init.py --dev --no-npm' script
+
+`init.py` script should be run after pulling any new changes
+
+If you are making changes to web files, use `npm run build:dev` or `npm run start:dev`
 
 
 ## Setup and run
@@ -88,6 +98,19 @@ _Important!_ Command injection protection is fully supported for Linux, but _onl
 
 ### XSS and CSRF
 At the moment script server _is_ vulnerable to these attacks.
+
+## Contribution
+If you like the project and think you could help with making it better, there are many ways you can do it:
+- Create a new issue for new feature proposal or a bug
+- Implement existing issues (there are quite some of them: frontend/backend, simple/complex, choose whatever you like)
+- Help with improving the documentation
+- Set up a demo server
+- Spread a word about the project to your colleagues, friends, blogs or any other channels
+- Any other things you could imagine
+
+Any contribution would be of great help and I will highly appreciate it! 
+If you have any questions, please create a new issue, or contact me via buggygm@gmail.com
+
 
 ## Special thanks
 ![JetBrains logo](https://github.com/JetBrains/logos/blob/master/web/jetbrains/jetbrains.svg)
