@@ -93,4 +93,4 @@ Please note, that this will cause all the users coming through a proxy to be tru
 If you are using reverse proxy with authentication, you can pass authenticated user to Script server using HTTP header (for example X-Forwarded-User)  
 And then you can enable this particular header in Script server for user identification. To do it, use [access.user_header_name](https://github.com/bugy/script-server/wiki/Server-configuration#--user_header_name) field  
 
-Check #219 for proxy configuration examples  
+Check [ticket #219](https://github.com/bugy/script-server/pull/219) for proxy configuration examples  
