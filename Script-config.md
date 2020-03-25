@@ -1,4 +1,6 @@
-Each script should be configured in conf/runners/_conf-name_.json file, where _conf-name_ is an unique name for each script. Each configuration file should contain only one script. Configuration should be a valid JSON file.
+Each script should be configured in conf/runners/_conf-name_.json file, where _conf-name_ is a unique name for each script. Each configuration file should contain only one script. Configuration should be a valid JSON file.  
+
+Also, you can configure scripts using /admin.html page on your server.  
 
 Examples of configuration files can be found in [[stable/testing/configs|https://github.com/bugy/script-server/tree/stable/samples/configs]].
 
@@ -23,6 +25,7 @@ Configurable properties:
   * [default](#--default)
   * [type](#--type)
   * [secure](#--secure)
+  * [env_var](#--env_var)
   * \+ additional fields for [different types](#parameter-types)
   
 
@@ -249,6 +252,17 @@ _Required_: no
 _Type_: boolean  
 _Default_: false    
 
+
+
+
+### &nbsp;&nbsp;&nbsp;- `env_var`
+Pass parameter as specified environment variable. So it would be accessible from your script.  
+For example, if `"env_var": "MY_PARAM"`, you can use `echo "$MY_PARAM"` in your bash script  
+Please note, that all parameters are *additionally* passed as environment variables anyway, and `env_var` property allows to override the default name. For details, please check [the ticket](https://github.com/bugy/script-server/issues/181#issuecomment-568915216)
+
+_Required_: no  
+_Type_: string  
+_Default_: "PARAM_{capitalized parameter name with underscores}"  
 
 ---  
 
