@@ -57,25 +57,23 @@ User emails are the only information which Script server uses from the Google OA
 **allowed_users**  
 Google OAuth doesn't perform any access control itself. So any user with google account would be able to access your instance of Script server. To prevent it, there is a [[configuration property|Server-configuration#--allowed_users]] `allowed_users`, which is required in case of Google OAuth. Simply put the emails of all allowed users there (or you can even put &ast; for any user).  
 
-## Reverse proxy auth
-to be done
-
 ## No Auth
 Script server needs to identify users even if authentication is not enabled. Identification is needed for the same [Authentication purposes](#authentication-purposes)  
 
-There are 2 possible identificators in the Script server:  
+There are 3 possible identificators in the Script server:  
 * [random personal token](#personal-token) (default)  
 * [IP](#ip) (can be configured)  
+* [Reverse proxy auth](#reverse-proxy-auth) (can be configured)  
 
 Access rights are configured based on these identificators.  
 
 ### personal token 
-To my knowledge, there is no reliable way to identify anonymous users. Therefore on initial connection a user gets a unique personal token, which will stay valid for at least several days.  
-The token is encrypted by the server and stored on client side.  
+To my knowledge, there is no reliable way to identify anonymous users. Therefore on the initial connection, a user gets a unique personal token, which will stay valid for at least several days.  
+The token is encrypted by the server and stored on the client-side.  
 
 This token can be retrieved from the server logs or from an execution log file.  
 
-This token can be used for access configuration. However by its nature, this token is not a best option for configuration: it's hard to remember and find out and it's temporal. So if possible, it's always better to configure IP identification.  
+This token can be used for access configuration. However, by its nature, this token is not the best option for configuration: it's hard to remember and find out and it's temporal. So if possible, it's always better to configure IP identification.  
 
 ### IP
 Identifying users by IP has multiple problems:
@@ -84,9 +82,15 @@ Identifying users by IP has multiple problems:
 * DHCP [(wikipedia)](https://en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol)  
 
 But if you have trusted users and restricted network, you can add your users to `trusted_ips` list ([[see config|Server-configuration#--trusted_ips]]).  
-After that you would be able to configure users access by their IP.  
+After that, you would be able to configure users' access by their IP.  
 
 **reverse proxy**  
 If you are using a reverse proxy, real user IPs are not resolved by default. However, if you add the proxy's IP in the `trusted_ips` list, a real IP will be taken from X-Forwarded-For or X-Real-IP headers (proxy has to fill them).  
 
-Please note, that this will cause all the users coming through proxy to be trusted as well.  
+Please note, that this will cause all the users coming through a proxy to be trusted as well.  
+
+### Reverse proxy auth
+If you are using reverse proxy with authentication, you can pass authenticated user to Script server using HTTP header (for example X-Forwarded-User)  
+And then you can enable this particular header in Script server for user identification. To do it, use [access.user_header_name](https://github.com/bugy/script-server/wiki/Server-configuration#--user_header_name) field  
+
+Check #219 for proxy configuration examples  
