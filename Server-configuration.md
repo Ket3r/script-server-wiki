@@ -1,6 +1,6 @@
 Script-server has default settings and works out of the box. For changing the settings, please edit _conf/conf.json_ file (create new if needed).  
 You can set custom conf.json location by running Script server with -f parameter (e.g. `launcher.py -f /home/me/configs/script-server.json`)  
-Please note, that configuration changes require server restart.  
+Please note, that configuration changes require a server restart.  
 
 [Example](#example) can be found at the bottom of the page.  
 
@@ -22,8 +22,10 @@ Full list of configurable properties:
 * [access](#access)
   * [allowed users](#--allowed_users)
   * [admin_users](#--admin_users)
+  * [full_history](#--full_history)
   * [groups](#--groups)
   * [trusted_ips](#--trusted_ips)
+  * [user_header_name](#--user_header_name)
 * [alerts](#alerts)
   * [destinations](#--destinations)
     * [type](#----type)
@@ -56,7 +58,7 @@ _Type_: string (ip)
 
 
 ### `title`
-Custom web page title shown to a user  
+Custom web page title is shown to a user  
 
 _Default_: Script Server  
 _Type_: string  
@@ -64,7 +66,7 @@ _Type_: string
 
 ## `ssl`
 SSL configuration, use it for enabling communication over SSL  
-This would require additional private key and certificate configuration (see below)  
+This would require an additional private key and certificate configuration (see below)  
 
 _Default_: ssl disabled  
 _Type_: json object  
@@ -163,7 +165,7 @@ _Example_: `"client_id": "12345678.apps.googleusercontent.com"`
 
 ### - `secret`
 (Google OAuth)  
-Secret, provided by Google  
+The secret, provided by Google  
 Environment variables can be used, prefixed by $$  
 
 _Required_: yes  
@@ -172,21 +174,21 @@ _Example_: `"secret": "AbCdEfgHI"`
 
 
 ## `access`
-Access configuration section, can be used to completely prohibit an access or to limit it. 
-Allows to configure access groups and trusted users. 
+Access configuration section can be used to completely prohibit access or to limit it. 
+Allows configuring access groups and trusted users. 
 Users should be specified either by:
 * their login name (if auth is enabled)
-* or ip (if auth is disabled and `trusted_ips` is enabled)  
+* or IP (if auth is disabled and `trusted_ips` is enabled)  
 
-Any other names won't have affect due to security reasons.  
+Any other names won't have an effect due to security reasons.  
 For detailed description , please see [[Authorization|Authorization]]  
 
 _Required_: no  
 _Type_: json array  
 
 ### - `allowed_users`
-List of allowed usernames, who can access the script-server. Single asterisk (*) stays for any user.
-By default any user is allowed  
+List of allowed usernames, who can access the script-server. A single asterisk (*) stays for any user.
+By default, any user is allowed  
 Important note: users from `groups` and `admin_users` are always allowed. Thus there is no need to specify them explicitly.
 
 _Default_: &ast;  
@@ -203,9 +205,18 @@ _Default_ (with auth): []
 _Required_: no
 _Type_: json array  
 
+
+### - `full_history`
+List of users, who can see the execution history of other users  
+This should be a list of non-admin users (because `admin_users` can see full history anyway)
+
+_Default_: []  
+_Required_: no  
+_Type_: json array  
+
 ### - `groups`
 List of groups with the information, which users belong to each group. Users should be specified by username.
-There is an additional explicit group _admin_users_, which is created from `admin_users` field. If this group is created explicitly, then `admin_users` property doesn't create an own group.  
+There is an additional explicit group _admin_users_, which is created from the `admin_users` field. If this group is created explicitly, then `admin_users` property doesn't create its own group.  
 Groups can be references with @groupname syntax. Groups can even reference other groups  
 
 _Type_:  json dict  
@@ -227,26 +238,35 @@ _Example2_:
 ```  
 
 ### - `trusted_ips`
-This option allows to specify which IPs can be trusted. It has 2 effects:  
+This option allows specifying which IPs can be trusted. It has 2 effects:  
 **On reverse proxies**  
 All the requests, coming from reverse proxy has the same IP, so in audit information of the user, the IP of the proxy will be shown. To prevent it, you can put proxy's IP in the `trusted_ips` list, so the user IP will be resolved based on HTTP Headers from the proxy  
 **On identification without `auth`**  
-If `auth` is disabled, IP can used to identify the users. But since IP is not very reliable, trusted IPs should be specified explicitly. If IP is not trusted, then each user would get a temporary identification token, which is harder to user in configuration (e.g. in `admin_users` or `groups`). More details can be found at [[Authorization|Authorization]]  
+If `auth` is disabled, IP can be used to identify the users. But since IP is not very reliable, trusted IPs should be specified explicitly. If IP is not trusted, then each user would get a temporary identification token, which is harder to use in configuration (e.g. in `admin_users` or `groups`). More details can be found at [[Authorization|Authorization]]  
 
 _Type_: json array  
 _Default_: []  
 _Required_: no  
 _Example_: `"trusted_ips": ["192.168.0.15", "172.0.0.10"]`  
 
+### - `user_header_name`
+(works only when auth is disabled)  
+Allows identifying users by an HTTP header. Can be used, when authentication is performed by a reverse proxy  
+See [reverse-proxy-auth](https://github.com/bugy/script-server/wiki/Authentication#reverse-proxy-auth) for details
+
+_Type_: string  
+_Required_: no  
+_Example_: `"user_header_name": "X-Forwarded-User"`  
+
 ## `alerts`
 Configuration section for alert notifications in case of script execution failure.  
-Notifications contain script name, username, exit code and an attached log file.  
+Notifications contain script name, username, exit code, and an attached log file.  
 
 _Type_: json object  
 _Required_: no  
 
 ### - `destinations`
-List of destinations, where an alert should be send to. Multiple destinations can be configured at once, even for the same `type`.  
+List of destinations, where an alert should be sent to. Multiple destinations can be configured at once, even for the same `type`.  
 
 _Type_: json array
 _Default_: []
@@ -255,12 +275,12 @@ _Default_: []
 Type of destination. Supported values:  
 **email**  
 requires `smtplib` module  
-Alert is send as an email. Execution log file will be attached as a file  
+Alert is sent as an email. The execution log file will be attached as a file  
   
 **http**  
 requires `requests` module  
-Alert message is sent to an HTTP server via POST request. The alert message will be send in the request body, under _message_ name.  
-Execution log file will be attached as a multipart file with "log" name.  
+The alert message is sent to an HTTP server via POST request. The alert message will be sent in the request body, under _message_ name.  
+The execution log file will be attached as a multipart file with "log" name.  
 
 _Type_: string  
 _Required_: yes  
@@ -288,7 +308,7 @@ _Type_: string
 
 ### --- `auth_enabled`
 (email)  
-Boolean flag specifying if authentication is required to send an email.  
+A boolean flag specifying if authentication is required to send an email.  
 
 _Default_: false (true, if login or password are set)  
 _Required_: no  
@@ -314,7 +334,7 @@ _Example1_: `"password": "$$EMAIL_PWD"`
 
 ### --- `tls`
 (email)
-Specifies, whether server requires TLS layer  
+Specifies, whether the server requires TLS layer  
 
 _Default_: false (true for gmail server)  
 _Required_: no  
@@ -322,7 +342,7 @@ _Type_: boolean
 
 ### --- `url`
 (http)
-A URL where alert notification will be sent to.  
+A URL where the alert notification will be sent to.  
 
 _Required_: yes  
 _Type_: string  
@@ -337,7 +357,7 @@ _Required_: no
 
 ### - `execution_file`
 Filename pattern for script execution logs.  
-Each execution is always written to a separate file, so if the filename is not uniquie, it's prefixed with random value.  
+Each execution is always written to a separate file, so if the filename is not unique, it's prefixed with a random value.  
 The following variables can be used (via $varname or ${varname} syntax):
 * ID - execution identificator
 * USERNAME - authentication name of the user
