@@ -57,6 +57,9 @@ User emails are the only information which Script server uses from the Google OA
 **allowed_users**  
 Google OAuth doesn't perform any access control itself. So any user with google account would be able to access your instance of Script server. To prevent it, there is a [[configuration property|Server-configuration#--allowed_users]] `allowed_users`, which is required in case of Google OAuth. Simply put the emails of all allowed users there (or you can even put &ast; for any user).  
 
+## Reverse proxy auth
+to be done
+
 ## No Auth
 Script server needs to identify users even if authentication is not enabled. Identification is needed for the same [Authentication purposes](#authentication-purposes)  
 
