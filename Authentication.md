@@ -51,7 +51,31 @@ In order to load user groups `base_dn` property should be defined in the [[confi
 ## Google OAuth
 _Requires: connection to google.com and googleapis.com_  
 
-Script server can authenticate users via [Google OAuth Service](https://developers.google.com/identity/protocols/OAuth2). `client_id` and `secret` properties should be acquired from Google and configured in the Script server.  
+Script server can authenticate users via [Google OAuth Service](https://developers.google.com/identity/protocols/OAuth2). `client_id` and `secret` properties should be acquired from Google and configured in the Script server.
+
+### Instructions
+- Go to [https://console.developers.google.com/apis/credentials](https://console.developers.google.com/apis/credentials)
+- Click on **+ CREATE CREDENTIALS**, select **OAuth client ID**
+- Select _Application type_ as **Web application**
+- Add **Authorized redirect URIs**, URI should be like: **https://my-script-server.mydomain.com/login** or **https://mydomain.com/script-server/login**
+- Save **Client ID** and **Client secret** into script-server's configuration file. Example:
+
+```json
+{
+    "port": 5000,
+    "address": "127.0.0.1",
+    "title": "My Script Server",
+    "auth": {
+        "type": "google_oauth",
+        "client_id": "COPY PASTE HERE",
+        "secret": "COPY PASTE HERE"
+    },
+    "access": {
+        "allowed_users": [ "myusername@gmail.com"],
+        "admin_users": [ "myusername@gmail.com" ]
+    }
+}
+```
 
 Usernames of the users are their email addresses. These email adresses can and should be used when configuring user access rights.  
 User emails are the only information which Script server uses from the Google OAuth Service.  
