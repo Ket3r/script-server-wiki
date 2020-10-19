@@ -1,6 +1,8 @@
 Authentication can be enabled in Script server via configuration (see [[auth|Server-configuration#auth]] configuration). At the moment the following auth providers are supported:
 * [LDAP](#ldap)
 * [Google OAuth](#google-oauth)  
+* [No Auth](#no-auth)
+* [Reverse proxy auth](#reverse-proxy-auth)
 
 If authentication is *not* enabled, please refer to [No Auth](#no-auth) section  
 
@@ -89,7 +91,7 @@ If you are using a reverse proxy, real user IPs are not resolved by default. How
 
 Please note, that this will cause all the users coming through a proxy to be trusted as well.  
 
-### Reverse proxy auth
+## Reverse proxy auth
 If you are using reverse proxy with authentication, you can pass authenticated user to Script server using HTTP header (for example X-Forwarded-User)  
 And then you can enable this particular header in Script server for user identification. To do it, use [access.user_header_name](https://github.com/bugy/script-server/wiki/Server-configuration#--user_header_name) field  
 
