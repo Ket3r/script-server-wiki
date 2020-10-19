@@ -386,11 +386,11 @@ _Example_: `"execution_date_format": "%y-%m-%d_%H-%M-%S"`
 ---
 
 ## Example
-```javascript
+```json
 {
   "port": 8080,
   "address": "192.168.0.1",
-  "title": "My Script Server"
+  "title": "My Script Server",
   "ssl": {
     "key_path": "testing/ssl/script-server.key",
     "cert_path": "testing/ssl/script-server.crt"
