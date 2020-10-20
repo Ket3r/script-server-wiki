@@ -57,7 +57,7 @@ Script server can authenticate users via [Google OAuth Service](https://develope
 - Go to [https://console.developers.google.com/apis/credentials](https://console.developers.google.com/apis/credentials). _(Select your existing project or you have to create new google project)_
 - Click on **+ CREATE CREDENTIALS**, select **OAuth client ID**
 - Select _Application type_ as **Web application**
-- Add **Authorized redirect URIs**, URI should be like: **https://my-script-server.mydomain.com/login** or **https://mydomain.com/script-server/login**
+- Add **Authorized redirect URIs**, URI should be like: **https://my-script-server.mydomain.com/login.html** or **https://mydomain.com/script-server/login.html**
 - Save **Client ID** and **Client secret** into script-server's configuration file. Example:
 
 ```json
