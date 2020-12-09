@@ -8,6 +8,7 @@ Full list of configurable properties:
 * [port](#port)
 * [address](#address)
 * [title](#title)
+* [max_request_size](#max_request_size)
 * [ssl](#ssl)
   * [key_path](#--key_path)
   * [cert_path](#--cert_path)
@@ -63,6 +64,12 @@ Custom web page title is shown to a user
 _Default_: Script Server  
 _Type_: string  
 
+### `max_request_size`
+Allows specifying max accepted file size (_in megabytes_) for upload.  
+Use this parameter if your users upload huge files, or, to the contrary, when you want to allow uploading only small files (not to occupy the server storage)  
+
+_Default_: 100  
+_Type_: number
 
 ## `ssl`
 SSL configuration, use it for enabling communication over SSL  
