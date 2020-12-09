@@ -83,6 +83,23 @@ User emails are the only information which Script server uses from the Google OA
 **allowed_users**  
 Google OAuth doesn't perform any access control itself. So any user with google account would be able to access your instance of Script server. To prevent it, there is a [[configuration property|Server-configuration#--allowed_users]] `allowed_users`, which is required in case of Google OAuth. Simply put the emails of all allowed users there (or you can even put &ast; for any user).  
 
+## Gitlab OAuth
+Script server can authenticate users via Gitlab server, hosted or cloud. How to acquire client_id and secret you can find at https://docs.gitlab.com/ee/integration/oauth_provider.html. Script server requires `read_user` scope or `api` if you want group support.
+
+Gitlab groups can be used in `allowed_users` and `admin_users`. Nested groups can be used using the full path (`@some/nested/group`)
+
+Options:
+* `type` (required) - should be `gitlab`
+* `client_id` (required) - acquired gitlab client id
+* `secret` (required) - acquired gitlab secret
+* `url` - base url of Gitlab instance. Default - https://gitlab.com
+* `auth_info_ttl` - time to live for info user cache. After expiry, script server will request GitLab for the updated information (e.g. read new groups). Default: 0 (never check GitLab again)
+* `state_dump_file` - path to a dump file, where current authentication data is persisted. If not defined, then the data is not persisted between server restarts, thus all the users are logged out on a restart.
+* `session_expire_minutes` - user inactivity time before logged out. Default: 0 (never expires)
+* `group_support` - import user's Gitlab groups, require 'api' scope. Default: true
+* `group_search` - search string used for filter groups, useful if users have too many groups because only 100 first returned. Default: do not filter
+
+
 ## No Auth
 Script server needs to identify users even if authentication is not enabled. Identification is needed for the same [Authentication purposes](#authentication-purposes)  
 
