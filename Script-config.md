@@ -9,6 +9,7 @@ Configurable properties:
 * [script_path](#script_path)
 * [description](#description)
 * [working_directory](#working_directory)
+* [group](#group)
 * [allowed_users](#allowed_users)
 * [output_files](#output_files)
 * [requires_terminal](#requires_terminal)
@@ -74,6 +75,14 @@ Working directory for the script
 _Required_: no  
 _Type_: string  
 _Default_: script-server directory  
+
+
+
+### `group`
+Allows to aggregate multiple scripts under the same collapsible header on the UI. Just specify the same group for those scripts  
+
+_Required_: no  
+_Type_: string  
 
 ### `allowed_users`
 List of users, who can access the script  
