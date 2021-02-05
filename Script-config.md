@@ -16,6 +16,8 @@ Configurable properties:
 * [bash_formatting](#bash_formatting)
 * [include](#include)
 * [hidden](#hidden)
+* [scheduling](#scheduling)
+  * [enabled](#--enabled)
 * [parameters](#parameters)
   * [name](#--name)
   * [param](#--param)
@@ -165,6 +167,17 @@ Can be used to disable a script or for `include`d  configurations
 _Required_: no  
 _Type_: boolean
 _Default_: false
+
+
+### `scheduling`
+Scheduling configuration section for a script. Use this section if you would like to allow users to schedule script execution (once in the future, or repeatedly).  See [Wiki](https://github.com/bugy/script-server/wiki/Script-scheduling) for details  
+
+### &nbsp;&nbsp;&nbsp;- `enabled`
+Enables scheduling for a script. So that users would be able to schedule executions  
+
+_Required_: no  
+_Type_: boolean  
+_Default_: false  
 
 ### `parameters`
 List of script parameters. Parameters are shown on the GUI and passed to a script exactly in the same order.
