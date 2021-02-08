@@ -20,6 +20,11 @@ Full list of configurable properties:
   * [base_dn](#--base_dn) 
   * [client_id](#--client_id) 
   * [secret](#--secret) 
+  * [group_support](#--group_support) 
+  * [group_search](#--group_search) 
+  * [auth_info_ttl](#--auth_info_ttl) 
+  * [session_expire_minutes](#--session_expire_minutes) 
+  * [state_dump_file](#--state_dump_file) 
 * [access](#access)
   * [allowed users](#--allowed_users)
   * [admin_users](#--admin_users)
@@ -105,6 +110,8 @@ _Type_: json object
 Type of authentication provider. Supported types: 
 * ldap (requires python `ldap3` module)  
 * google_oauth  
+* gitlab
+* htpasswd
 
 For each provider description read corresponding sections on [[Authentication|Authentication]]
 
@@ -113,12 +120,13 @@ _Type_: string
 
 
 ### - `url`
-(LDAP)  
-URL of the LDAP server  
+(LDAP, Gitlab)  
+URL of the LDAP/Gitlab server  
 
-_Required_: yes  
+_Required_: yes (for LDAP), no (for Gitlab)
 _Type_: string  
-_Example_: `"url": "ldap://192.168.100.3",`  
+_Example_: `"url": "ldap://192.168.100.3",`
+_Default_:  https://gitlab.com (for Gitlab) 
 
 
 ### - `username_pattern`
@@ -163,22 +171,61 @@ _Example_: `"base_dn": "dc=buggy,dc=net"`
 
 
 ### - `client_id`
-(Google OAuth)  
-Client ID, provided by Google  
+(Google OAuth, Gitlab)  
+Client ID in OAuth provider
 
 _Required_: yes  
 _Type_: string  
 _Example_: `"client_id": "12345678.apps.googleusercontent.com"`  
 
 ### - `secret`
-(Google OAuth)  
-The secret, provided by Google  
+(Google OAuth, Gitlab)  
+The secret in OAuth provider
 Environment variables can be used, prefixed by $$  
 
 _Required_: yes  
 _Type_: string  
 _Example_: `"secret": "AbCdEfgHI"`  
 
+### - `group_support`
+(Gitlab)  
+Enabled loading user groups from Gitlab. This requires Gitlab 'api' scope  
+
+_Required_: no  
+_Type_: boolean  
+_Default_: true  
+
+### - `group_search`
+(Gitlab)  
+Optional filter for user groups, if there are too many groups for users
+
+_Required_: no  
+_Type_: boolean  
+_Example_: `"group_search": "developers/"`  
+
+### - `auth_info_ttl`
+(Google OAuth, Gitlab)  
+Time (in milliseconds) to cache user and group information before requested it from Gitlab server again, default 0 - cache forever and never check Gitlab again  
+
+_Required_: no  
+_Type_: integer  
+_Default_: 0  
+
+### - `session_expire_minutes`
+(Google OAuth, Gitlab)  
+User session expiration time. If a user stays inactive for more than the expiration time, he is logged out and has to authenticate again. By default, there is only server-wide expiration of 30 days.  
+
+_Required_: no  
+_Type_: integer  
+_Default_: 0 (no expiration)  
+
+
+### - `state_dump_file`
+(Google OAuth, Gitlab)  
+File path where to persist user/group information, default - only memory used (restarting app will logout all users).  
+
+_Required_: no  
+_Type_: string  
 
 ## `access`
 Access configuration section can be used to completely prohibit access or to limit it. 
