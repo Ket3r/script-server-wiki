@@ -1,6 +1,8 @@
 Authentication can be enabled in Script server via configuration (see [[auth|Server-configuration#auth]] configuration). At the moment the following auth providers are supported:
 * [LDAP](#ldap)
 * [Google OAuth](#google-oauth)  
+* [Gitlab OAuth](#gitlab-oauth)  
+* [.htpasswd file](#htpasswd-file)  
 * [No Auth](#no-auth)
 * [Reverse proxy auth](#reverse-proxy-auth)
 
@@ -99,6 +101,24 @@ Options:
 * `group_support` - import user's Gitlab groups, require 'api' scope. Default: true
 * `group_search` - search string used for filter groups, useful if users have too many groups because only 100 first returned. Default: do not filter
 
+## .htpasswd file
+If you would like to have a simple authentication, you can use a [.htpasswd file](https://httpd.apache.org/docs/2.4/programs/htpasswd.html)  
+You need to configure a path to this file in Script server.  
+
+### Requirements
+Preferably, `htpasswd` utility should be installed on a machine. In this case Script server will delegate verification to this utility.  
+
+Otherwise, as a fallback, Script server will verify user credentials itself. In this case only the encryption algorithms from this page are supported: https://httpd.apache.org/docs/2.4/misc/password_encryptions.html. Also, if bcrypt algorithm is used, it requires `bcrypt` python module
+
+### Configuration
+To enable htpasswd authentication, you need to set auth type and a path to the file, in the [server configuration](https://github.com/bugy/script-server/wiki/Server-configuration#auth)  
+Example configuration:
+```
+"auth": {
+    "type": "htpasswd",
+    "htpasswd_path": "path/to/.htpasswd"
+}
+```
 
 ## No Auth
 Script server needs to identify users even if authentication is not enabled. Identification is needed for the same [Authentication purposes](#authentication-purposes)  
