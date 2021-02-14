@@ -16,6 +16,7 @@ Configurable properties:
 * [bash_formatting](#bash_formatting)
 * [include](#include)
 * [hidden](#hidden)
+* [admin_users](#admin_users)
 * [scheduling](#scheduling)
   * [enabled](#--enabled)
 * [parameters](#parameters)
@@ -169,6 +170,13 @@ _Required_: no
 _Type_: boolean
 _Default_: false
 
+### `admin_users`
+List of admin users, who have admin access to this particular script. Be default any admin can modify any script. But there are cases, when some admins shouldn't modify some scripts.  
+
+_Required_: no  
+_Type_: json array  
+_Default_: any admin  
+_Example_: `[ "user1", "user2", "@someGroup" ]`  
 
 ### `scheduling`
 Scheduling configuration section for a script. Use this section if you would like to allow users to schedule script execution (once in the future, or repeatedly).  See [Wiki](https://github.com/bugy/script-server/wiki/Script-scheduling) for details  
