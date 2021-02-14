@@ -25,6 +25,7 @@ Full list of configurable properties:
   * [auth_info_ttl](#--auth_info_ttl) 
   * [session_expire_minutes](#--session_expire_minutes) 
   * [state_dump_file](#--state_dump_file) 
+  * [htpasswd_path](#--htpasswd_path)
 * [access](#access)
   * [allowed users](#--allowed_users)
   * [admin_users](#--admin_users)
@@ -225,6 +226,14 @@ _Default_: 0 (no expiration)
 File path where to persist user/group information, default - only memory used (restarting app will logout all users).  
 
 _Required_: no  
+_Type_: string  
+
+
+### - `htpasswd_path`
+(.htpasswd)  
+File path with stored .htpasswd credentials
+
+_Required_: yes (for .htpasswd auth)
 _Type_: string  
 
 ## `access`
