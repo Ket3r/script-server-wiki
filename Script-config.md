@@ -98,6 +98,7 @@ List of files, which will be downloadable by user after a script execution.
 This option supports the following features:  
   - \* and ** wildcard
   - substitution of script parameters with ${parameter_name}
+  - substitution of auth variables: `${auth.username}` (authenticated username) or `${auth.audit_name}` (user info, when auth is disabled)
   - use regex pattern for searching file path in a script output:
     - should be surrounded with #
     - matching group number can be specified with number# (e.g. #2#)
@@ -332,13 +333,13 @@ Specific _list_ fields:
 
 #### `values`
 List of allowed values for the parameter. Can be either predefined values or a result from another script invocation  
-If values are read from a script, other parameter values can be injected with `${parameter name}` syntax  
+If values are read from a script, parameter values can be injected with `${parameter name}` syntax, auth values can be injected with `${auth.username}` (authenticated username) or `${auth.audit_name}` (user info, when auth is disabled)
 
 _Required_: *yes*  
 _Type_: array or object  
 _Example1_: `"values": [ "Apple", "Orange", "Banana" ]`  
 _Example2_: `"values": { "script": "ls /home/me/projects" }`  
-_Example3_: `"values": { "script": "ls /${param 1}/${param 2}" }`  
+_Example3_: `"values": { "script": "ls /home/${auth.username}/${param 1}/${param 2}" }`  
 
   
 ---  
