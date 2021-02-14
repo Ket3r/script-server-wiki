@@ -4,6 +4,10 @@ Please note, that configuration changes require a server restart.
 
 [Example](#example) can be found at the bottom of the page.  
 
+Additionally, Script server supports the following command-line arguments:
+* `--log-folder` - where log files will be stored to (default: script-server/log)  
+* `--tmp-folder` - where temp files will be stored to (default: script-server/temp)  
+
 Full list of configurable properties:
 * [port](#port)
 * [address](#address)
@@ -315,11 +319,12 @@ This option allows specifying which IPs can be trusted. It has 2 effects:
 All the requests, coming from reverse proxy has the same IP, so in audit information of the user, the IP of the proxy will be shown. To prevent it, you can put proxy's IP in the `trusted_ips` list, so the user IP will be resolved based on HTTP Headers from the proxy  
 **On identification without `auth`**  
 If `auth` is disabled, IP can be used to identify the users. But since IP is not very reliable, trusted IPs should be specified explicitly. If IP is not trusted, then each user would get a temporary identification token, which is harder to use in configuration (e.g. in `admin_users` or `groups`). More details can be found at [[Authorization|Authorization]]  
+In `trusted_ips` you can specify either an IP address or IP subnet (see the syntax in the example below). Subnets might be helpful for docker or dynamic addresses.  
 
 _Type_: json array  
 _Default_: []  
 _Required_: no  
-_Example_: `"trusted_ips": ["192.168.0.15", "172.0.0.10"]`  
+_Example_: `"trusted_ips": ["192.168.0.15", "172.0.0.10", "192.168.1.0/8"]`  
 
 ### - `user_header_name`
 (works only when auth is disabled)  
