@@ -47,6 +47,7 @@ Full list of configurable properties:
 * [logging](#logging)
   * [execution_file](#--execution_file)
   * [execution_date_format](#--execution_date_format)
+* [secret_storage_file](#secret_storage_file)
 
 ---
 
@@ -119,6 +120,14 @@ For each provider description read corresponding sections on [[Authentication|Au
 _Required_: yes  
 _Type_: string  
 
+
+### - `expiration_days`
+Number of days to keep a user authenticated after his initial login.  
+The property can be a real number, e.g. 0,5.  
+
+_Required_: no  
+_Type_: float  
+_Default_: 30  
 
 ### - `url`
 (LDAP, Gitlab)  
@@ -445,6 +454,14 @@ _Default_: "%y%m%d_%H%M%S"
 _Required_: no
 _Type_: string
 _Example_: `"execution_date_format": "%y-%m-%d_%H-%M-%S"`
+
+
+## `secret_storage_file`
+Allows to specify a location for secret.dat file, which is used cookie encryption. This option is helpful for docker containers, when recreating the container destroys the generated file and all the users have to log in again  
+
+_Default_: temp folder of script-server  
+_Required_: no
+_Type: string  
 
 ---
 
