@@ -303,6 +303,14 @@ Simple text field. The value is passed to a script as it is.
 If parameter is `secure`, text field on UI will be masked.  
 _Default value type_: string  
 
+Specific _text_ fields:  
+#### `max_length`
+_(v 1.17)_  
+Max allowed length (in characters) of the text field.  
+
+_Required_: no  
+_Default_: unlimited  
+
 ---  
 
 ### int
