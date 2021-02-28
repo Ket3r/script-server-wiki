@@ -14,6 +14,7 @@ Configurable properties:
 * [output_files](#output_files)
 * [requires_terminal](#requires_terminal)
 * [bash_formatting](#bash_formatting)
+* [output_format](#output_format)
 * [include](#include)
 * [hidden](#hidden)
 * [admin_users](#admin_users)
@@ -142,12 +143,29 @@ _Default_: true
 
 
 ### `bash_formatting`
+(_up to v 1.16, inclusive. Replaced by output_format_)  
 Enables ANSI escape command parsing and showing formatted output on the user interface. E.g. \033[01;31m is a bold red text  
 Supported escape sequences: 16 text colors and 16 background colors, 4 text styles  
 
 _Required_: no  
 _Type_: boolean  
 _Default_: true for linux and mac, false otherwise  
+
+
+
+### `output_format`
+_(v 1.17)_  
+Specifies how Script server should parse script output. At the moment 4 formats are supported:
+* `terminal` (default): enables ANSI escape command parsing and showing formatted output on the user interface. E.g. \033[01;31m is a bold red text. Additionally this format supports hyperlinks highlighting and inline images  
+* `text`: no processing is done, script output is displayed as it is  
+* `html`: script output is treated as HTML elements and is rendered correspondingly. Scripts/css are not supported, for those please use `html_iframe`  
+* `html_iframe`: script output is treated as a complete HTML page (including linked CSS and script files). In this case, Script server has no control over output styling (font family, size, color, etc.)  
+
+_Required_: no  
+_Type_: string  
+_Allowed values_: [terminal, text, html, html_iframe]  
+_Default_: terminal  
+
 
 ### `include`
 Allows to load configuration from another file.  
