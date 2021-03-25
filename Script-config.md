@@ -40,6 +40,7 @@ Parameter types:
 * [boolean/no_value](#boolean-no_value)
 * [list](#list)
 * [multiselect](#multiselect)
+* [editable_list](#editable_list)
 * [file_upload](#file_upload)
 * [server_file](#server_file)
 * [ip](#ip)
@@ -288,7 +289,7 @@ Parameter type, which affects how a parameter is shown to a user (checkbox, text
 If `no_value` is set to true, then the `type` is ignored and always is boolean  
 For detail description of each type and its supported properties see the section after properties description.  
 
-_Allowed values_: int, list, text, file_upload, multiselect, server_file, ip, ip4, ip6  
+_Allowed values_: int, list, editable_list, text, file_upload, multiselect, server_file, ip, ip4, ip6  
 _Required_: no  
 _Type_: string  
 _Default_: "text"  
@@ -389,7 +390,6 @@ Specific _multiselect_ fields:
 #### `values`  
 See [list.values](#values)      
 
-
 #### `separator`  
 Defines values separator if they are passed as a single argument (e.g. comma-separated)  
 
@@ -405,6 +405,19 @@ _Required_: no
 _Default_: false  
 _Type_: boolean  
 
+
+---  
+
+### editable_list
+_(v 1.17)_  
+The same as `list`, but allows a user to type a custom value  
+Allowed values should be specified with `values` property  
+_Default value type_: string  
+
+Specific _editable_list_ fields:  
+
+#### `values`  
+See [list.values](#values)  
 
 ---  
 
