@@ -473,6 +473,21 @@ _Allowed values_: "file" and "dir"
 _Default_: any type  
 _Type_: string  
 
+#### `excluded_files`  
+_(v 1.17)_  
+List of files/folders/patterns which should be excluded and not shown to a user.  
+If the specified pattern is a folder, all descendant children will be excluded recursively (see examples below).  
+Supports pattern matching: `*` for a single-level matching (e.g. `/user/*/.ssh` or `path/*.log`) and `**` for recursive matching (any number of levels).   
+
+Some examples: 
+- `/var/log`: exclude all the files in /var/log folder and any descendants (e.g. /var/log/abc/some.log)
+- `/user/home/*.txt`: exclude any .txt files located directly in /user/home non-recursive. (e.g. /user/home/auth.txt - excluded, /user/home/documents/cv.txt - included)
+- `**/auth/**` - exclude any files, located in _auth_ folder (e.g. /var/_auth_/passwords, /user/home/.secrets/_auth_/secret.key)
+
+
+_Required_: no  
+_Type_: array  
+
 ---  
 
 ### ip  
