@@ -23,6 +23,7 @@ Configurable properties:
 * [parameters](#parameters)
   * [name](#--name)
   * [param](#--param)
+  * [same_arg_param](#--same_arg_param)
   * [no_value](#--no_value)
   * [description](#--description)
   * [required](#--required)
@@ -242,6 +243,14 @@ _Required_: no
 _Type_: string  
 
 
+### &nbsp;&nbsp;&nbsp;- `same_arg_param`
+If true, `param` and a user value will be sent as a single argument (without a whitespace). For example, if `param='--name='` and `value=abc`, the script argument will be `--name=abc`.  
+
+_Required_: no  
+_Type_: boolean  
+_Default_: false  
+
+
 ### &nbsp;&nbsp;&nbsp;- `no_value`
 Allows to pass only a flag to the script, without any value (e.g. `my_script.sh --verbose`)  
 `param` property is required in this case.  
@@ -398,12 +407,24 @@ _Default_: ","
 _Type_: string  
 
 #### `multiple_arguments`
+_(<= v1.16, replaced by `multiselect_argument_type`)_  
 Defines, if each value should be passed as a separate argument.  
 In this case `separator` property is ignored
 
 _Required_: no  
 _Default_: false  
 _Type_: boolean  
+
+#### `multiselect_argument_type`
+_(v1.17)_  
+Defines, how param and each single value should be passed to a script. Should be one of:
+  - `single_argument` (default): sends all the values as a single argument, separated by `separator` (-param value1,value2,value3)
+  - `argument_per_value`: sends every value as a separate argument (-param value1 value2 value3)
+  - `repeat_param_value`: sends every value as a separate argument and repeat param for each value (-param value1 -param value2 -param value3)
+
+_Required_: no  
+_Default_: single_argument  
+_Type_: string  
 
 
 ---  
