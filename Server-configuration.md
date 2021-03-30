@@ -136,11 +136,13 @@ _Default_: 30
 ### - `url`
 (LDAP, Gitlab)  
 URL of the LDAP/Gitlab server  
+For LDAP it can also be an array of multiple LDAP servers. In this case, the pooling method will be Round Robin  
 
 _Required_: yes (for LDAP), no (for Gitlab)
 _Type_: string  
-_Example_: `"url": "ldap://192.168.100.3",`
-_Default_:  https://gitlab.com (for Gitlab) 
+_Example_: `"url": "ldap://192.168.100.3",`  
+_Example_: `"url": ["ldap://192.168.100.3", "ldap://192.168.100.4"],`  
+_Default_:  https://gitlab.com (for Gitlab)  
 
 
 ### - `username_pattern`
