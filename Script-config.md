@@ -46,6 +46,8 @@ Parameter types:
 * [server_file](#server_file)
 * [ip](#ip)
 
+Additional options:
+* [script](#script)
 
 ---
 
@@ -287,7 +289,8 @@ _Default_: false
 ### &nbsp;&nbsp;&nbsp;- `default`
 Default value shown to a user  
 Environment variables can be specified with $$ (e.g. `"default": "$$HOME"`)  
-User credentials can be used with the following templates `${auth.username}` (authenticated username) or `${auth.audit_name}` (user info, when auth is disabled)
+User credentials can be used with the following templates `${auth.username}` (authenticated username) or `${auth.audit_name}` (user info, when auth is disabled).  
+A value can be defined by a script, for details see the [script](#script) section (parameters injection is not supported).  
 
 _Required_: no (for constants yes)  
 _Type_: depends on the parameter type  
@@ -376,14 +379,13 @@ _Default value type_: string
 Specific _list_ fields:
 
 #### `values`
-List of allowed values for the parameter. Can be either predefined values or a result from another script invocation  
-If values are read from a script, parameter values can be injected with `${parameter name}` syntax, auth values can be injected with `${auth.username}` (authenticated username) or `${auth.audit_name}` (user info, when auth is disabled)
+List of allowed values for the parameter. Can be either predefined values or a result from another script invocation (see details in [script](#script) section)    
 
 _Required_: *yes*  
 _Type_: array or object  
 _Example1_: `"values": [ "Apple", "Orange", "Banana" ]`  
 _Example2_: `"values": { "script": "ls /home/me/projects" }`  
-_Example3_: `"values": { "script": "ls /home/${auth.username}/${param 1}/${param 2}" }`  
+_Example3_: `"values": { "script": "ls /home/${auth.username}/${param 1}/${param 2} | grep abc ", "shell": true }`  
 
   
 ---  
@@ -514,5 +516,29 @@ _Type_: array
 ### ip  
 Requires user to specify a valid IP address as a parameter. Accepts either IPv4 or IPv6.  
 If only only version should be accepted, there are corresponding parameter types ip4 and ip6  
-Only IP lexical validation is performed and address is not checked for being accessible. 
+Only IP lexical validation is performed and the address is not checked for being accessible. 
 
+
+---
+## Additional options
+
+### `script`
+For `default` and `values` options, you can load data from script execution. Here is an example:
+```
+"values": {
+  "script": "some_script.sh ${another param}",
+  "shell": false
+}
+```
+The `script` option supports auth variables and injection of other parameter values, for example: 
+```
+"script": "ls ${auth.username}/${file_param}"
+``` 
+Auth variables are: 
+- ${auth.username} (authenticated username)
+- ${auth.audit_name} (user info, when auth is disabled)  
+
+_(v1.17)_  
+The `shell` option allows you to use bash operators (e.g. | pipe operator) in scripts.  
+By default, this option is enabled only for scripts without any variables.  
+When script contains variables, it can be a subject to [Shell injection](https://en.wikipedia.org/wiki/Code_injection#Shell_injection), that's why `shell` is disabled by default. If you trust your users (and no one else can access the server), you can explicitly enable it be using `"shell": true`
