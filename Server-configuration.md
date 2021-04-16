@@ -487,7 +487,7 @@ _Required_: no
 Allows configuring the level of [XSRF](https://en.wikipedia.org/wiki/Cross-site_request_forgery) protection.  
 Options:
 - `token` (default): users are protected via a unique XSRF token. This is the most secure and recommended option  
-- `header`: Script server requires `X-Requested-With` header (any value) to be send with any PUT/POST request  
+- `header`: Script server requires `X-Requested-With` header (any value) to be send with any PUT/POST request. This protection relies on [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) protection, i.e. that attacker site cannot call AJAX to another domain. In most of the cases CORS protection is reliable, and can only be bypassed in very special circumstances. Thus `header` XSRF protection is just slightly less protected than `token`  
 - `disabled`: no XSRF protection will be done
 
 _Type_: string  
