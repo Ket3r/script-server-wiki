@@ -1,4 +1,6 @@
 Script-server has default settings and works out of the box. For changing the settings, please edit _conf/conf.json_ file (create new if needed).  
+It's recommended **not** to take an example configuration as it is, as it contains a lot values, which you don't need most probably. Only enable those options, which are really needed for you (for example, authentication).  
+
 You can set custom conf.json location by running Script server with -f parameter (e.g. `launcher.py -f /home/me/configs/script-server.json`)  
 Please note, that configuration changes require a server restart.  
 
@@ -52,6 +54,8 @@ Full list of configurable properties:
   * [execution_file](#--execution_file)
   * [execution_date_format](#--execution_date_format)
 * [secret_storage_file](#secret_storage_file)
+* [security](#security)
+  * [xsrf_protection](#--xsrf_protection)
 
 ---
 
@@ -470,6 +474,26 @@ _Default_: temp folder of script-server
 _Required_: no
 _Type: string  
 
+
+
+## `security`
+Section for security configuration.  
+Script server comes with the most strict security configuration, so it's recommended not to touch this section unless really needed.  
+
+_Type_: json dict  
+_Required_: no  
+
+### - `xsrf_protection`
+Allows configuring the level of [XSRF](https://en.wikipedia.org/wiki/Cross-site_request_forgery) protection.  
+Options:
+- `token` (default): users are protected via a unique XSRF token. This is the most secure and recommended option  
+- `header`: Script server requires `X-Requested-With` header (any value) to be send with any PUT/POST request  
+- `disabled`: no XSRF protection will be done
+
+_Type_: string  
+_Required_: no  
+_Default_: token  
+
 ---
 
 ## Example
@@ -519,6 +543,9 @@ _Type: string
   "logging": {
     "execution_file": "$DATE-$ID.log",
     "execution_date_format": "%y-%m-%d_%H-%M"
+  },
+  "security": {
+    "xsrf_protection": "token"
   }
 }
 ```
