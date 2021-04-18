@@ -162,8 +162,8 @@ _(v 1.17)_
 Specifies how Script server should parse script output. At the moment 4 formats are supported:
 * `terminal` (default): enables ANSI escape command parsing and showing formatted output on the user interface. E.g. \033[01;31m is a bold red text. Additionally this format supports hyperlinks highlighting and inline images  
 * `text`: no processing is done, script output is displayed as it is  
-* `html`: script output is treated as HTML elements and is rendered correspondingly. Scripts/css are not supported, for those please use `html_iframe`  
-* `html_iframe`: script output is treated as a complete HTML page (including linked CSS and script files). In this case, Script server has no control over output styling (font family, size, color, etc.)  
+* `html`: script output is treated as HTML elements and is rendered correspondingly. Scripts/css are not supported, for those please use `html_iframe`. Also, the HTML content is sanitized, to protect against [XSS attacks  ](https://owasp.org/www-community/attacks/xss/)
+* `html_iframe`: script output is treated as a complete HTML page (including linked CSS and script files). In this case, Script server has no control over output styling (font family, size, color, etc.). To make CSS/scripts work, no HTML sanitizing is done (including user input), so such logs are vulnerable to [XSS Attacks](https://owasp.org/www-community/attacks/xss/). Please avoid using `html_iframe` if your server can be accessed by untrusted users.  
 
 _Required_: no  
 _Type_: string  
