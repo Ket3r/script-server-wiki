@@ -14,6 +14,8 @@ Below you can find sample screenshots of the admin interface
 ## Parameter configuration section
 ![parameter-config](https://user-images.githubusercontent.com/1275813/77478118-c23b6200-6e1d-11ea-8a32-bf565018adaf.png)
 
+## Script code editor
+![Code editor](https://user-images.githubusercontent.com/1275813/119255373-c3038b80-bbbb-11eb-89dd-0b4ff3166a74.png)
 
 ***
 
