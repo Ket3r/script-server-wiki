@@ -36,6 +36,7 @@ Full list of configurable properties:
   * [allowed users](#--allowed_users)
   * [admin_users](#--admin_users)
   * [full_history](#--full_history)
+  * [code_editors](#--code_editors)
   * [groups](#--groups)
   * [trusted_ips](#--trusted_ips)
   * [user_header_name](#--user_header_name)
@@ -293,6 +294,16 @@ List of users, who can see the execution history of other users
 This should be a list of non-admin users (because `admin_users` can see full history anyway)
 
 _Default_: []  
+_Required_: no  
+_Type_: json array  
+
+
+### - `code_editors`
+_(v 1.17)_  
+List of admin users, who can edit/upload scripts code [ticket #284](https://github.com/bugy/script-server/issues/284). Please note, that these users would be able to view and modify **any** file on server (if OS user has access to it).  
+By default, all admins can edit script code.  
+
+_Default_: ['@admin_users']  
 _Required_: no  
 _Type_: json array  
 
