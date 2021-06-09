@@ -1,14 +1,13 @@
 Script-server has default settings and works out of the box. For changing the settings, please edit _conf/conf.json_ file (create new if needed).  
 It's recommended **not** to take an example configuration as it is, as it contains a lot values, which you don't need most probably. Only enable those options, which are really needed for you (for example, authentication).  
 
-You can set custom conf.json location by running Script server with -f parameter (e.g. `launcher.py -f /home/me/configs/script-server.json`)  
-Please note, that configuration changes require a server restart.  
-
 [Example](#example) can be found at the bottom of the page.  
 
 Additionally, Script server supports the following command-line arguments:
-* `--log-folder` - where log files will be stored to (default: script-server/log)  
-* `--tmp-folder` - where temp files will be stored to (default: script-server/temp)  
+* `-f`, `--config-file` - filename, where server configuration is read from. Can be absolute path to a file (default: conf.json)
+* `-d`, `--config-dir` - directory, where configuration file is stored (default: script-server/conf) 
+* `-l`, `--log-folder` - where log files will be stored to (default: script-server/log)  
+* `-t`, `--tmp-folder` - where temp files will be stored to (default: script-server/temp)  
 
 Full list of configurable properties:
 * [port](#port)
