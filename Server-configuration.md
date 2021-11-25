@@ -83,7 +83,7 @@ _Type_: string
 Allows specifying max accepted file size (_in megabytes_) for upload.  
 Use this parameter if your users upload huge files, or, to the contrary, when you want to allow uploading only small files (not to occupy the server storage)  
 
-_Default_: 100  
+_Default_: 10  
 _Type_: number
 
 ## `ssl`
