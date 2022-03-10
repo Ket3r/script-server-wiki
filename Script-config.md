@@ -450,6 +450,11 @@ The file is uploaded to the server and stored in a temp folder. Then the file is
 `secure` flag has no effect for this type  
 _Default value type_: unsupported  
 
+Hint:  
+Currently only a single file can be uploaded.  
+If you need to upload multiple files you can work around this by uploading
+an archive (e.g. zip) and unpack the archive in your script.
+
 ---  
 
 ### server_file
